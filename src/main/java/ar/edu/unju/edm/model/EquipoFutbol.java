@@ -14,6 +14,11 @@ public class EquipoFutbol implements Serializable{
 	 * 
 	 */
 	
+	// Cliente --- HTML (CSS) Bootstrap  --- Controller --- Service    ---  Repository --- MODELO ---  BD (MySQL)
+	// FrontEnd																BackEnd
+	//		MVC																DAO
+	//FullStack
+	
 	private String nombre;	
 	
 	public EquipoFutbol() {

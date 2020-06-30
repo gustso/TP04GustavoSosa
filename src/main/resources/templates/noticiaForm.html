@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
+	type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
+	type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
+<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
+	type="text/javascript"
+	src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<style>
+    .required .control-label:after { 
+    color: #d00;
+    content: "*";    
+}
+</style>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+	
+		<button type="button" class="btn btn-success" data-toggle="modal"
+				data-target="#modalBuscarAutor">Buscar Autor</button>					
+		<button type="button" class="btn btn-success" data-toggle="modal"
+				data-target="#modalAgregarAutor">Agregar Autor</button>
+
+		<form id="formNoticia" th:object="${noticiaDelForm}"
+			th:action="@{/agregarNoticia}" method="post">
+			<div class="form-group">
+				<label for="titulo">Ingresar Titulo:</label> <input id="titulo"
+					class="form-control" type="text" placeholder="titulo nuevo"
+					th:field="${noticiaDelForm.titulo}"></input>
+			</div>
+			<div class="form-group">
+				<label for="resumen">Ingresar Resumen:</label>
+				<textarea class="form-control" id="resumen" rows="3"
+					th:field="${noticiaDelForm.resumen}"></textarea>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Agregar Noticia</button>
+		</form>
+<!-- se deberia agregar otro boton Cancelar para que si no quiero guardar noticia, NO se guarde el Autor en el Listado -->
+		<div class="card">
+		<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Apellido</th>
+						<th scope="col">Nombre</th>						
+					</tr>
+				</thead>
+				<tbody>					
+					<tr th:each="autor : ${autores}">
+						<td th:text="${autor.id}"></td>
+						<td th:text="${autor.apellido}"></td>
+						<td th:text="${autor.nombre}"></td>						
+					</tr>
+					
+				</tbody>
+			</table>
+			</div></div>
+		</div>
+
+		<div class="modal fade" id="modalBuscarAutor" tabindex="-1" role="dialog"
+			aria-labelledby="agregarAutorModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<form id="formAutor" th:object="${autorDelForm}" th:action="@{/buscarAutor}" method="post">
+					<div class="modal-header">
+						<h5 class="modal-title" id="agregarAutorModal">Buscar Autor</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">						
+							<div class="form-group">
+								<label for="apellido">Apellido:</label> <input
+									class="form-control" id="apellido"
+									th:field="${autorDelForm.apellido}"
+									placeholder="Ingresar Apellido Autor"></input>								
+							</div>					
+					</div>				
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="Buscar Autor" >						
+					</div>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+<!-- como el modal es el mismo deberia tener una bandera que cambie segun que boton se haya apretado -->
+	 
+		<div class="modal fade" id="modalAgregarAutor" tabindex="-1" role="dialog"
+			aria-labelledby="agregarAutorModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<form id="formAutor" th:object="${autorDelForm}" th:action="@{/agregarAutor}" method="post">
+					<div class="modal-header">
+						<h5 class="modal-title" id="agregarAutorModal">Agregar Autor</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">						
+							<div class="form-group">
+								<label for="apellido">Apellido:</label> <input
+									class="form-control" id="apellido"
+									th:field="${autorDelForm.apellido}"
+									placeholder="Ingresar Apellido Autor"></input>
+								<label for="nombre" class="required control-label">Nombre:</label> <input
+									class="form-control" id="nombre"
+									th:field="${autorDelForm.nombre}"
+									placeholder="Ingresar Nombre Autor" required></input>
+							</div>					
+					</div>				
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="Agregar Autor" >						
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+<div class="alert-danger text-center" th:if="${formAutorErrorMessage}" th:text="${formAutorErrorMessage}">Name Error</div>
+
+</body>
+</html>

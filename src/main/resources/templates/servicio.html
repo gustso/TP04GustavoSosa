@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" href="../static/css/style.css">
+
 <meta charset="ISO-8859-1">
 <title>Servicios</title>
 </head>
@@ -26,62 +27,28 @@
 		</div>
 		<div class="row">
 			<div class="col-9">
-				<div class="card">
+				<div class="card" th:each="noticia : ${todasLasNoticias}">
 					<div class="row">
 						<div class="col-4">
 							<img src="../static/img/logo.jpg" class="card-img" alt="logoFI">
 						</div>
 						<div class="col-8">
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">This is a wider card with supporting
+								<h5 class="card-title" th:text="${noticia.titulo}">Card title</h5>
+								<p class="card-text" th:text="${noticia.resumen}">This is a wider card with supporting
 									text below as a natural lead-in to additional content. This
 									content is a little bit longer.</p>
+								<div th:each="autor : ${noticia.autores}">
+									<h2 th:text="${autor.apellido}"></h2>
+								</div>									
 								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
+									<small class="text-muted" th:text="${noticia.fecha}">Last updated 3 mins ago</small>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-4">
-							<img src="../static/img/logo.jpg" class="card-img" alt="logoFI">
-						</div>
-						<div class="col-8">
-							<div class="card-body">
-								<h3>Card title</h3>
-								<p class="textCard">This is a longer card with supporting
-									text below as a natural lead-in to additional content. This
-									content is a little bit longer.</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-4">
-							<img src="../static/img/logo.jpg" class="card-img" alt="logoFI">
-						</div>
-						<div class="col-8">
-							<div class="card-body">
-								<h3 class="card-title">Card title</h3>
-								<p class="textCard">This card has supporting text below as a
-									natural lead-in to additional content.</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-4">
-							<img src="../static/img/logo.jpg" class="card-img" alt="logoFI">
-						</div>
-						<div class="col-8">
-							<div class="card-body">
-								<h3 class="card-title">Card title</h3>
-								<p class="textCard">This is a wider card with supporting
-									text below as a natural lead-in to additional content. This
-									card has even longer content than the first to show that equal
-									height action.</p>
-							</div>
-						</div>
-					</div>
+					
+					
 				</div>
 			</div>
 			<div class="publicidad col-3">
