@@ -10,6 +10,5 @@ import ar.edu.unju.edm.model.Noticia;
 @Repository
 public interface INoticiaRepository extends CrudRepository<Noticia,Integer>{
 	public Noticia findByFecha(LocalDateTime fecha);	
-	public Iterable<Noticia> findByTitulo(String titulo);
-
+	public Iterable<Noticia> findByTitulo(String titulo);	
 }

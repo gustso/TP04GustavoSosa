@@ -28,6 +28,8 @@
 				data-target="#modalBuscarAutor">Buscar Autor</button>					
 		<button type="button" class="btn btn-success" data-toggle="modal"
 				data-target="#modalAgregarAutor">Agregar Autor</button>
+		<button type="button" class="btn btn-success" data-toggle="modal"
+				data-target="#modalBuscarNoticiasAutor">Agregar Autor</button>
 
 		<form id="formNoticia" th:object="${noticiaDelForm}"
 			th:action="@{/agregarNoticia}" method="post">
@@ -68,11 +70,37 @@
 			</div></div>
 		</div>
 
+<!-- Tabla de Noticias -->
+		<div class="card">
+		<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Titulo</th>
+						<th scope="col">Resumen</th>						
+					</tr>
+				</thead>
+				<tbody>					
+					<tr th:each="noticia : ${noticias}">
+						<td th:text="${noticia.idNoticia}"></td>
+						<td th:text="${noticia.titulo}"></td>
+						<td th:text="${noticia.resumen}"></td>						
+					</tr>
+					
+				</tbody>
+			</table>
+			</div></div>
+		</div>
+
+
+
 		<div class="modal fade" id="modalBuscarAutor" tabindex="-1" role="dialog"
 			aria-labelledby="agregarAutorModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
-				<form id="formAutor" th:object="${autorDelForm}" th:action="@{/buscarAutor}" method="post">
+				<form id="formBuscarAutor" th:object="${autorDelForm}" th:action="@{/buscarAutor}" method="post">
 					<div class="modal-header">
 						<h5 class="modal-title" id="agregarAutorModal">Buscar Autor</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -98,13 +126,14 @@
 				</div>
 			</div>
 		</div>
+		
 <!-- como el modal es el mismo deberia tener una bandera que cambie segun que boton se haya apretado -->
 	 
 		<div class="modal fade" id="modalAgregarAutor" tabindex="-1" role="dialog"
 			aria-labelledby="agregarAutorModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
-				<form id="formAutor" th:object="${autorDelForm}" th:action="@{/agregarAutor}" method="post">
+				<form id="formAgregarAutor" th:object="${autorDelForm}" th:action="@{/agregarAutor}" method="post">
 					<div class="modal-header">
 						<h5 class="modal-title" id="agregarAutorModal">Agregar Autor</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -133,6 +162,40 @@
 				</div>
 			</div>
 		</div>
+
+<!-- modal que buscar Autor y Noticia -->
+
+		<div class="modal fade" id="modalBuscarNoticiasAutor" tabindex="-1" role="dialog"
+			aria-labelledby="buscarNoticiasAutorModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<form id="formBuscarNoticiasAutor" th:object="${autorDelForm}" th:action="@{/buscarNoticiasAutor}" method="post">
+					<div class="modal-header">
+						<h5 class="modal-title" id="buscarNoticiasAutorModal">Buscar Autor</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">						
+							<div class="form-group">
+								<label for="apellido">Apellido:</label> <input
+									class="form-control" id="apellido"
+									th:field="${autorDelForm.apellido}"
+									placeholder="Ingresar Apellido Autor"></input>								
+							</div>					
+					</div>				
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="Buscar Autor" >						
+					</div>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+
 
 	</div>
 <div class="alert-danger text-center" th:if="${formAutorErrorMessage}" th:text="${formAutorErrorMessage}">Name Error</div>
