@@ -109,4 +109,20 @@ public class AplicacionController {
 		}			
 	return crearNoticia(model);
 }
+	
+	@PostMapping("/buscarAutor")
+	public String buscarNoticiasAutor(@ModelAttribute("autorDelForm") Autor autor,  Model model) throws Exception {	
+		try {
+			Autor autorEncontrado = iAutorService.buscarAutor(autor.getApellido());
+			try {			
+				iAutorService.guardarAutorEncontrado(autorEncontrado);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block				 
+				model.addAttribute("formAutorErrorMessage", e.getMessage());				
+			}
+		}catch(Exception e) {			
+			model.addAttribute("formAutorErrorMessage", e.getMessage());
+		}			
+	return crearNoticia(model);
+}
 }
