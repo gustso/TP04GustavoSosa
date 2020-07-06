@@ -1,14 +1,18 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 public class Reportero {
 
@@ -19,10 +23,9 @@ public class Reportero {
 	
 	@Column
 	private String apellido;
-	
-	@Autowired
-	@Column
-	private Noticia noticia;
+		
+	@OneToMany(mappedBy = "reportero")
+	private List<Noticia> noticias;
 	
 	public Reportero() {
 		// TODO Auto-generated constructor stub
@@ -44,13 +47,13 @@ public class Reportero {
 		this.apellido = apellido;
 	}
 
-	public Noticia getNoticia() {
-		return noticia;
+	public List<Noticia> getNoticias() {
+		return noticias;
 	}
 
-	public void setNoticia(Noticia noticia) {
-		this.noticia = noticia;
+	public void setNoticias(List<Noticia> noticias) {
+		this.noticias = noticias;
 	}
-	
-	
+
+		
 }

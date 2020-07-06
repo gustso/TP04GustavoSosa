@@ -1,24 +1,20 @@
 package ar.edu.unju.edm.controller;
 
-import java.time.LocalDate;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.edm.model.Autor;
 import ar.edu.unju.edm.model.Noticia;
-import ar.edu.unju.edm.model.Reportero;
 import ar.edu.unju.edm.repository.IReporteroRepository;
 import ar.edu.unju.edm.service.IAutorService;
 import ar.edu.unju.edm.service.INoticiaService;
+import ar.edu.unju.edm.service.IReporteroService;
 
 
 @Controller
@@ -36,6 +32,8 @@ public class AplicacionController {
 	IReporteroRepository iRepository;
 	@Autowired
 	Noticia unaNoticiaIntermedio;
+	@Autowired
+	IReporteroService reporteroService;
 
 	@GetMapping("/home")
 	public String iniciarAplicacion() {
@@ -45,18 +43,18 @@ public class AplicacionController {
 	@GetMapping("/servicio")
 	public String mostrarServicio(Model model) {
 		//LocalDate fecha = LocalDate.parse("2020-06-16");
-		Noticia unaNoticia = new Noticia ();
+		//Noticia unaNoticia = new Noticia ();
 		//unaNoticia.setFecha(fecha);
-		unaNoticia.setResumen("Resumen02");
-		unaNoticia.setTitulo("Titulo02");
-		Reportero unReportero = new Reportero();
-		unReportero.setApellido("Sosa");
-		unReportero.setNoticia(unaNoticia);
-		iRepository.save(unReportero);		
+		//unaNoticia.setResumen("Resumen02");
+		//unaNoticia.setTitulo("Titulo02");
+		//Reportero unReportero = new Reportero();
+		//unReportero.setApellido("Sosa");
+		//unReportero.setNoticia(unaNoticia);
+		//iRepository.save(unReportero);		
 		//iNoticiaService.guardarNoticia(unaNoticia);	
 		
 		//model.addAttribute("noticiaDeLaVista", unaNoticia);
-		model.addAttribute("todasLasNoticias", iNoticiaService.buscarTodasNoticias());
+		//model.addAttribute("todasLasNoticias", iNoticiaService.buscarTodasNoticias());
 		//model.addAttribute("formTab", "active");
 		return "servicio";
 	}
@@ -66,6 +64,7 @@ public class AplicacionController {
 		model.addAttribute("noticiaDelForm",unaNoticia);				
 		model.addAttribute("autores",iAutorService.buscarTodosAutores());
 		model.addAttribute("autorDelForm", unAutor);
+		model.addAttribute("todosLosReporteros", reporteroService.buscarTodosReporteror());
 		return "noticiaForm";
 	}
 		
@@ -125,4 +124,6 @@ public class AplicacionController {
 		}			
 	return crearNoticia(model);
 }
+	
+	
 }

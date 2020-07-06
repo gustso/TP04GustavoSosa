@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+<meta charset="ISO-8859-1">
+<title>Servicios</title>
+</head>
+<body>
+	<div>
+		<div>
+			<div class="title">
+				<h1>Servicios para Mascotas</h1>
+			</div>
+			<div class="row">
+				<nav class="nav">
+					<a class="nav-link" href="#">Home</a> <a class="nav-link" href="#">Adoptciones</a>
+					<a class="nav-link" href="#">Veterinarias</a> <a class="nav-link"
+						href="#">Voluntariado</a>
+					<form class="form-inline">
+						<input class="form-control" type="search" placeholder="Search"
+							aria-label="Search">
+						<button class="btn" type="submit">Search</button>
+					</form>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-9">
+				<div class="card" th:each="noticia : ${todasLasNoticias}">
+					<div class="row">
+						<div class="col-4">
+							<img src="../static/img/logo.jpg" class="card-img" alt="logoFI">
+						</div>
+						<div class="col-8">
+							<div class="card-body">
+								<h5 class="card-title" th:text="${noticia.titulo}">Card title</h5>
+								<p class="card-text" th:text="${noticia.resumen}">This is a wider card with supporting
+									text below as a natural lead-in to additional content. This
+									content is a little bit longer.</p>
+								<div th:each="autor : ${noticia.autores}">
+									<h2 th:text="${autor.apellido}"></h2>
+								</div>									
+								<p class="card-text">
+									<small class="text-muted" th:text="${noticia.fecha}">Last updated 3 mins ago</small>
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div class="publicidad col-3">
+				<div> Titulo de Publicidad</div>
+				<div>Anuncios</div>
+			</div>
+		</div>
+
+		<div>Contacto</div>
+	</div>
+</body>
+</html>

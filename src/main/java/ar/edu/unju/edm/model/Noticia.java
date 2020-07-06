@@ -54,9 +54,9 @@ public class Noticia implements Serializable{
 	//private Autor autor;
 
 	
-	//@ManyToOne(cascade = CascadeType.ALL)
-	//@JoinColumn(name = "autor_id")
-	//private Autor autor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reportero_id")
+	private Reportero reportero;
 	
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "noticia")
 	//private List<Autor> autores;
@@ -163,15 +163,15 @@ public class Noticia implements Serializable{
 		this.autores = autores;
 	}
 
-	/**
-	public Autor getAutor() {
-		return autor;
+	
+	public Reportero getReportero() {
+		return reportero;
 	}
 
-	public void setAutor(Autor autor) {
-		this.autor = autor;
+	public void setReportero(Reportero reportero) {
+		this.reportero = reportero;
 	}
-	**/
+	
 	
 	
 }
